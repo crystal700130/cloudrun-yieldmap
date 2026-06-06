@@ -67,6 +67,35 @@ def yield_map():
     )
     plt.title("POD MAP")
 
+
+
+
+
+
+    vf2_map = pd.pivot_table(
+        df,
+        values="Vf2",
+        columns="X",
+        index="Y",
+        aggfunc="mean"
+    )
+
+    vf2_map = (
+        vf2_map
+        .sort_index(ascending=False)
+        .sort_index(axis=1, ascending=True)
+    )
+
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(
+        pod_map,
+        cmap="rainbow",
+        vmin=2.8,
+        vmax=3.3
+    )
+    plt.title("Vf2 MAP")
+
+
     buffer = io.BytesIO()
     plt.savefig(buffer, format="png", bbox_inches="tight")
     plt.close()
